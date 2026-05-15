@@ -95,6 +95,7 @@
   min-width: 0;
   border: none;
   background: transparent;
+  caret-color: #007AFF;
   font: inherit;
   /* Figma: Body/Regular 17px, letter-spacing -0.4px */
   font-size: 17px;
