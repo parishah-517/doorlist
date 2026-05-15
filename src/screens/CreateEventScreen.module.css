@@ -268,6 +268,33 @@
   text-overflow: ellipsis;
 }
 
+.rowLabelMultiline {
+  flex: 1;
+  min-width: 0;
+  font-size: 17px;
+  line-height: 22px;
+  letter-spacing: -0.4px;
+  word-break: break-word;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  padding-right: 16px;
+  /* clamp to 3 lines */
+  max-height: calc(11px + 3 * 22px + 11px);
+  overflow: hidden;
+}
+
+.rowLabelMultilineInner {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.rowSurfaceTop {
+  align-items: flex-start;
+  overflow: hidden;
+}
+
 .rowLabelSecondary {
   color: var(--color-label-secondary);
 }
@@ -889,7 +916,9 @@
 
 .descModalTextarea {
   width: 100%;
-  min-height: 140px;
+  min-height: 88px;
+  max-height: 320px;
+  overflow-y: auto;
   border: none;
   background: transparent;
   font: inherit;

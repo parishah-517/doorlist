@@ -142,6 +142,7 @@ export function CreateEventScreen() {
   const [pickerSelectedFile, setPickerSelectedFile] = useState<File | null>(null);
   const [descModalOpen, setDescModalOpen] = useState(false);
   const [descDraft, setDescDraft] = useState("");
+  const descTextareaRef = useRef<HTMLTextAreaElement>(null);
 
   const hostInputRef = useRef<HTMLInputElement>(null);
 
@@ -412,16 +413,20 @@ export function CreateEventScreen() {
               <div className={styles.groupedRow}>
                 <button
                   type="button"
-                  className={styles.rowSurface}
+                  className={`${styles.rowSurface} ${description ? styles.rowSurfaceTop : ""}`}
                   aria-label="Add description"
                   onClick={() => { setDescDraft(description); setDescModalOpen(true); }}
                 >
                   <span className={styles.rowIcon}>
                     <img src={assets.iconDescription} width="12" height="16" alt="" aria-hidden="true" />
                   </span>
-                  <span className={`${styles.rowLabel} ${description ? "" : styles.rowLabelSecondary}`}>
-                    {description || "Add description"}
-                  </span>
+                  {description ? (
+                    <span className={styles.rowLabelMultiline}>
+                      <span className={styles.rowLabelMultilineInner}>{description}</span>
+                    </span>
+                  ) : (
+                    <span className={`${styles.rowLabel} ${styles.rowLabelSecondary}`}>Add description</span>
+                  )}
                 </button>
               </div>
 
@@ -561,9 +566,20 @@ export function CreateEventScreen() {
       {descModalOpen && (
         <Modal title="Description" onClose={() => setDescModalOpen(false)}>
           <textarea
+            ref={descTextareaRef}
             className={styles.descModalTextarea}
             value={descDraft}
-            onChange={(e) => setDescDraft(e.target.value)}
+            onChange={(e) => {
+              setDescDraft(e.target.value);
+              const el = e.target;
+              el.style.height = "auto";
+              el.style.height = `${el.scrollHeight}px`;
+            }}
+            onFocus={(e) => {
+              const el = e.target;
+              el.style.height = "auto";
+              el.style.height = `${el.scrollHeight}px`;
+            }}
             placeholder="What's this event about?"
             aria-label="Event description"
             autoFocus
