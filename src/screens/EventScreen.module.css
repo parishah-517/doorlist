@@ -386,18 +386,25 @@
 }
 
 @media (max-width: 1100px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
   .shell {
     padding-left: clamp(16px, 5vw, 48px);
     padding-right: clamp(16px, 5vw, 48px);
   }
 
-  .mediaColumn,
+  .grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .mediaColumn {
+    max-width: 100%;
+    justify-self: stretch;
+  }
+
   .infoColumn {
-    max-width: none;
+    max-width: 100%;
   }
 
   .mapWrap {
