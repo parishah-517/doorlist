@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef, useEffect } from "react";
-import { Sparkles, Film, PartyPopper, Smile, Crown, Trophy, type LucideIcon } from "lucide-react";
+import { assets } from "../figmaAssets";
 import styles from "./PhotoPickerPanel.module.css";
 
 const EMPTY_ILLUSTRATION = "https://www.figma.com/api/mcp/asset/81f91372-9d7a-4982-b52d-aa84a0a52199";
@@ -12,24 +12,22 @@ function ChevronLeft() {
   );
 }
 
-const ACTIVE_COLOR   = "#000000";
-const INACTIVE_COLOR = "rgba(60,60,67,0.3)";
-
 type TabDef = {
   id: string;
   label: string;
-  Icon: LucideIcon;
-  size: number;
+  iconSrc: string;
+  iconW: number;
+  iconH: number;
   seedBase: number;
 };
 
 const TABS: TabDef[] = [
-  { id: "featured",   label: "Featured",   Icon: Sparkles,     size: 16, seedBase: 10  },
-  { id: "gifs",       label: "GIFs",       Icon: Film,         size: 18, seedBase: 40  },
-  { id: "party",      label: "Party",      Icon: PartyPopper,  size: 18, seedBase: 70  },
-  { id: "meme",       label: "Meme",       Icon: Smile,        size: 18, seedBase: 100 },
-  { id: "greek-life", label: "Greek Life", Icon: Crown,        size: 18, seedBase: 130 },
-  { id: "sports",     label: "Sports",     Icon: Trophy,       size: 18, seedBase: 190 },
+  { id: "featured",   label: "Featured",   iconSrc: assets.iconTabFeatured,  iconW: 14, iconH: 17, seedBase: 10  },
+  { id: "gifs",       label: "GIFs",       iconSrc: assets.iconTabGifs,      iconW: 17, iconH: 12, seedBase: 40  },
+  { id: "party",      label: "Party",      iconSrc: assets.iconTabParty,     iconW: 20, iconH: 20, seedBase: 70  },
+  { id: "meme",       label: "Meme",       iconSrc: assets.iconTabMeme,      iconW: 20, iconH: 16, seedBase: 100 },
+  { id: "greek-life", label: "Greek Life", iconSrc: assets.iconTabGreekLife, iconW: 20, iconH: 16, seedBase: 130 },
+  { id: "sports",     label: "Sports",     iconSrc: assets.iconTabSports,    iconW: 16, iconH: 16, seedBase: 190 },
 ];
 
 const GIPHY_IDS = [
@@ -137,29 +135,39 @@ export function PhotoPickerPanel({ onSelect, onClose }: PhotoPickerPanelProps) {
       </div>
 
       {/* Tab bar */}
+      <div className={styles.tabBarWrap}>
       <div className={styles.tabBar} role="tablist" aria-label="Image categories">
         {TABS.map((tab) => {
           const active = activeTabId === tab.id;
-          const iconColor = active ? ACTIVE_COLOR : INACTIVE_COLOR;
           return (
             <button
               key={tab.id}
               type="button"
               role="tab"
               aria-selected={active}
-              className={styles.tab}
+              className={`${styles.tab} ${active ? styles.tabActive : ""}`}
               onClick={() => setActiveTabId(tab.id)}
             >
-              <span className={styles.tabIconWrap}>
-                <tab.Icon size={tab.size} color={iconColor} strokeWidth={1.75} />
-              </span>
-              <span className={`${styles.tabLabel} ${active ? styles.tabLabelActive : ""}`}>
-                {tab.label}
+              <span className={styles.tabContent}>
+                <span className={styles.tabIconWrap}>
+                  <img
+                    src={tab.iconSrc}
+                    width={tab.iconW}
+                    height={tab.iconH}
+                    alt=""
+                    aria-hidden="true"
+                    style={{ display: "block", opacity: active ? 1 : 0.3 }}
+                  />
+                </span>
+                <span className={`${styles.tabLabel} ${active ? styles.tabLabelActive : ""}`}>
+                  {tab.label}
+                </span>
               </span>
               <span className={`${styles.tabIndicator} ${active ? styles.tabIndicatorActive : ""}`} />
             </button>
           );
         })}
+      </div>
       </div>
 
       {/* Content area */}

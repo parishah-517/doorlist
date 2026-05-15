@@ -13,6 +13,16 @@ import iconDeleteHostMinus from "./assets/iconDeleteHostMinus.svg";
 import iconImageStackPrimary from "./assets/iconImageStackPrimary.svg";
 import iconImageStackSecondary from "./assets/iconImageStackSecondary.svg";
 import effectClear from "./assets/effectClear.svg";
+import iconCalendarPrimary from "./assets/iconCalendarPrimary.svg";
+import iconCalendarSecondary from "./assets/iconCalendarSecondary.svg";
+import iconMapPinPrimary from "./assets/iconMapPinPrimary.svg";
+import iconMapPinSecondary from "./assets/iconMapPinSecondary.svg";
+import iconTabFeatured from "./assets/iconTabFeatured.svg";
+import iconTabGifs from "./assets/iconTabGifs.svg";
+import iconTabParty from "./assets/iconTabParty.svg";
+import iconTabMeme from "./assets/iconTabMeme.svg";
+import iconTabGreekLife from "./assets/iconTabGreekLife.svg";
+import iconTabSports from "./assets/iconTabSports.svg";
 
 export const assets = {
   heroBackground: thumb1,
@@ -31,4 +41,14 @@ export const assets = {
   iconImageStackPrimary,
   iconImageStackSecondary,
   effectClear,
+  iconCalendarPrimary,
+  iconCalendarSecondary,
+  iconMapPinPrimary,
+  iconMapPinSecondary,
+  iconTabFeatured,
+  iconTabGifs,
+  iconTabParty,
+  iconTabMeme,
+  iconTabGreekLife,
+  iconTabSports,
 } as const;

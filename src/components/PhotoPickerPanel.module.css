@@ -158,11 +158,38 @@
 
 /* ── Tab bar ── */
 
+.tabBarWrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* full-width separator — painted before child elements so active indicator renders on top */
+.tabBarWrap::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(60, 60, 67, 0.36);
+}
+
+/* right-fade to hint at hidden tabs */
+.tabBarWrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(to right, transparent, rgba(220, 220, 225, 0.85));
+}
+
 .tabBar {
   display: flex;
   overflow-x: auto;
   scrollbar-width: none;
-  flex-shrink: 0;
 }
 
 .tabBar::-webkit-scrollbar {
@@ -170,19 +197,47 @@
 }
 
 .tab {
+  position: relative;
   flex: 0 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  /* gap-[8px] for tabs with icon (active uses same gap, indicator grows) */
-  gap: 8px;
-  /* pt-[16px] from Figma */
-  padding: 16px 12px 0;
-  min-width: 60px;
+  align-items: stretch;
+  /* inactive: 12px gap between content and indicator line */
+  padding: 16px 0 12px;
+  min-width: 84px;
   border: none;
   background: transparent;
   cursor: pointer;
   font: inherit;
+}
+
+.tabActive {
+  /* active: 8px gap between content and indicator line */
+  padding-bottom: 8px;
+}
+
+/* icon + label group */
+.tabContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0 12px;
+}
+
+.tabIndicator {
+  display: none;
+}
+
+.tabIndicatorActive {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #000000;
+  border-radius: 2px;
 }
 
 /* Tabs without icons have slightly more gap to compensate */
@@ -199,15 +254,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Fixed 16px height slot to align all icon rows uniformly */
-  height: 16px;
+  height: 20px;
   flex-shrink: 0;
-}
-
-.tabIconWrap img {
-  display: block;
-  max-height: 100%;
-  object-fit: contain;
 }
 
 
@@ -225,20 +273,6 @@
   color: var(--color-label-primary);
 }
 
-.tabIndicator {
-  display: block;
-  width: 100%;
-  /* inactive: 1px separator, rgba(60,60,67,0.36) from Figma */
-  height: 1px;
-  background: var(--color-separator);
-  border-radius: 2px;
-}
-
-.tabIndicatorActive {
-  /* active: 2px black from Figma */
-  height: 2px;
-  background: var(--color-label-primary);
-}
 
 /* ── Photo grid ── */
 

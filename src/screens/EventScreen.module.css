@@ -349,6 +349,55 @@
   opacity: 0.9;
 }
 
+/* ── Calendar icon ── */
+.calendarIcon {
+  position: relative;
+  width: 17.5px;
+  height: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.calendarPrimary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 17.5px;
+  height: 6.25px;
+}
+
+.calendarSecondary {
+  position: absolute;
+  top: 6.25px;
+  left: 0;
+  width: 17.5px;
+  height: 12.5px;
+}
+
+/* ── Map pin icon ── */
+.mapPinIcon {
+  position: relative;
+  width: 12.5px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.mapPinPrimary {
+  position: absolute;
+  top: 0;
+  left: 0.625px;
+  width: 11.25px;
+  height: 11.25px;
+}
+
+.mapPinSecondary {
+  position: absolute;
+  top: 11.1px;
+  left: 5px;
+  width: 2.5px;
+  height: 8.891px;
+}
+
 /* loading / error */
 .loading {
   display: flex;

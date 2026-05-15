@@ -7,6 +7,14 @@ import { assets } from "../figmaAssets";
 import { getEvent, type EventRow } from "../lib/supabase";
 import styles from "./EventScreen.module.css";
 
+function CalendarIcon() {
+  return <Calendar size={20} />;
+}
+
+function MapPinIcon() {
+  return <MapPin size={20} />;
+}
+
 const EFFECT_EMOJIS: (string | null)[] = [
   null, "🎉", "🍷", "💕", "💋", "⛽️", "🤝", "💸", "🌸", "🤡", "🍄",
 ];
@@ -176,14 +184,14 @@ export function EventScreen() {
             <h1 className={styles.title}>{event.title}</h1>
 
             <DetailRow
-              icon={<Calendar size={20} />}
+              icon={<CalendarIcon />}
               primary={formatDate(event.start_at, event.end_at)}
               secondary={formatTime(event.start_at, event.end_at)}
             />
 
             {event.location && (
               <DetailRow
-                icon={<MapPin size={20} />}
+                icon={<MapPinIcon />}
                 primary={event.location}
                 secondary={event.location}
                 href={`https://maps.google.com/?q=${encodeURIComponent(event.location)}`}
