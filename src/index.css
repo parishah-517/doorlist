@@ -1,6 +1,8 @@
-@import "tailwindcss";
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
-@theme {
+:root {
   /* ── Label (text) ── */
   --color-label-primary:      #000000;
   --color-label-secondary:    rgba(60, 60, 67, 0.60);
