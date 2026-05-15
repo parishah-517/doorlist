@@ -73,7 +73,7 @@ Clicking the invite button copies the event link to the clipboard and shows a to
 
 **Mapbox** — static map images via their geocoding API. Better visual fit than the Google Maps embed.
 
-**Figma MCP** — I pulled icons and assets directly from the Figma file as CDN URLs using Figma's MCP server. They all live in `src/figmaAssets.ts` as a single source of truth, so swapping an icon means updating one line.
+**Figma MCP** — I pulled icons and assets directly from the Figma file using Figma's MCP server. They're saved as local SVGs in `src/assets/` and referenced through `src/figmaAssets.ts` as a single source of truth, so swapping an icon means updating one file.
 
 ---
 
