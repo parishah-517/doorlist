@@ -164,8 +164,11 @@
 
 .dayBtn {
   width: 100%;
-  min-height: 34px;
+  aspect-ratio: 1 / 1;
   border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid transparent;
   background: transparent;
   font: inherit;
@@ -187,12 +190,17 @@
   outline-offset: 0;
 }
 
-.daySelected .dayBtn {
+.dayCell.daySelected .dayBtn {
   background: var(--color-overlay-xl);
   border-color: transparent;
   color: #fff;
   font-weight: 700;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dayCell.daySelected .dayBtn:hover:not(:disabled) {
+  background: var(--color-overlay-xl);
+  color: #fff;
 }
 
 .dayOutside {
@@ -274,4 +282,17 @@
   font-size: 15px;
   font-weight: 700;
   color: var(--color-label-primary);
+}
+
+@media (max-width: 768px) {
+  .popover {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%);
+    width: calc(100vw - 32px);
+    max-height: 80dvh;
+    overflow-y: auto;
+  }
 }

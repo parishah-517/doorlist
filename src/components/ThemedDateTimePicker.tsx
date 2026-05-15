@@ -85,14 +85,19 @@ export function ThemedDateTimePicker({ value, defaultValue, onChange, ariaLabel,
 
   useEffect(() => {
     if (!open) return;
-    const onDown = (e: MouseEvent) => {
-      const t = e.target as Node;
-      if (!anchorRef.current?.contains(t) && !popoverRef.current?.contains(t)) closePopover();
+    const onOutside = (e: MouseEvent | TouchEvent) => {
+      const t = (e instanceof TouchEvent ? e.touches[0]?.target : e.target) as Node | null;
+      if (t && !anchorRef.current?.contains(t) && !popoverRef.current?.contains(t)) closePopover();
     };
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") closePopover(); };
-    document.addEventListener("mousedown", onDown);
+    document.addEventListener("mousedown", onOutside);
+    document.addEventListener("touchstart", onOutside);
     document.addEventListener("keydown", onKey);
-    return () => { document.removeEventListener("mousedown", onDown); document.removeEventListener("keydown", onKey); };
+    return () => {
+      document.removeEventListener("mousedown", onOutside);
+      document.removeEventListener("touchstart", onOutside);
+      document.removeEventListener("keydown", onKey);
+    };
   }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleDaySelect = (day: Date | undefined) => {
