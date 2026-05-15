@@ -1,0 +1,277 @@
+.anchor {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  max-width: min(240px, 52vw);
+  padding: 6px 11px;
+  border-radius: 24px;
+  border: none;
+  background: var(--color-fill-quaternary);
+  font: inherit;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.4px;
+  color: var(--color-label-primary);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trigger:hover {
+  background: var(--color-fill-tertiary);
+}
+
+.triggerOpen {
+  background: var(--color-fill-primary);
+}
+
+.triggerEmpty {
+  color: var(--color-link);
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 2px;
+}
+
+.popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 30;
+  width: min(420px, calc(100vw - 32px));
+  padding: 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(255, 255, 255, 0.90) 50%,
+    rgba(248, 240, 255, 0.93) 100%
+  );
+  backdrop-filter: blur(48px) saturate(1.25);
+  -webkit-backdrop-filter: blur(48px) saturate(1.25);
+  box-shadow:
+    0 12px 40px rgba(70, 50, 110, 0.12),
+    0 2px 12px rgba(180, 120, 160, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+
+/* ── Side-by-side layout ── */
+
+.popoverBody {
+  display: flex;
+  gap: 4px;
+  align-items: stretch;
+}
+
+/* ── DayPicker wrappers ── */
+
+.calRoot {
+  flex: 1;
+  min-width: 0;
+}
+
+.calMonths {
+  display: block;
+}
+
+.calendarPanel {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Calendar header ── */
+
+.popoverHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.monthLabel {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.35px;
+  color: var(--color-label-primary);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.navBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  border: 1px solid var(--color-label-quaternary);
+  background: var(--color-fill-secondary);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: var(--color-label-primary);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.navBtn:hover {
+  background: var(--color-surface-md);
+}
+
+.navBtn:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 1px;
+}
+
+/* ── Calendar grid (table) ── */
+
+.weekday {
+  width: calc(100% / 7);
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-label-secondary);
+  padding: 4px 0;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.calGrid {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.dayCell {
+  padding: 2px;
+  text-align: center;
+}
+
+.dayBtn {
+  width: 100%;
+  min-height: 34px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: transparent;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  color: var(--color-label-primary);
+  cursor: pointer;
+}
+
+.dayBtn:hover:not(:disabled) {
+  background: rgba(120, 120, 128, 0.18);
+  border-color: transparent;
+  color: var(--color-label-primary);
+}
+
+.dayBtn:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 0;
+}
+
+.daySelected .dayBtn {
+  background: var(--color-overlay-xl);
+  border-color: transparent;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dayOutside {
+  opacity: 0.3;
+}
+
+.dayHidden {
+  visibility: hidden;
+}
+
+.dayToday .dayBtn {
+  font-weight: 700;
+}
+
+/* ── Time scroll column ── */
+
+.timePanel {
+  width: 112px;
+  flex-shrink: 0;
+  position: relative;
+  border-left: 1px solid rgba(255, 255, 255, 0.45);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 18%,
+    black 82%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 18%,
+    black 82%,
+    transparent 100%
+  );
+}
+
+.timeSlotList {
+  position: absolute;
+  inset: 0;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  padding-top: 40%;
+  padding-bottom: 40%;
+}
+
+.timeSlotList::-webkit-scrollbar {
+  display: none;
+}
+
+.timeSlot {
+  display: block;
+  width: 100%;
+  padding: 9px 6px;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.2px;
+  color: var(--color-label-secondary);
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.timeSlot:hover {
+  color: var(--color-label-primary);
+}
+
+.timeSlot:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: -2px;
+  border-radius: 8px;
+}
+
+.timeSlotSelected {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-label-primary);
+}

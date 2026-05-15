@@ -1,0 +1,63 @@
+/* @property gives the browser type info so it can smoothly interpolate these
+   custom properties when they appear inside keyframe transform/opacity values. */
+@property --ef-sw-a   { syntax: "<length>"; inherits: false; initial-value:  0px; }
+@property --ef-sw-b   { syntax: "<length>"; inherits: false; initial-value:  0px; }
+@property --ef-max-op { syntax: "<number>"; inherits: false; initial-value: 0.9; }
+
+/* Parent must be position:relative. overflow:hidden clips emojis that drift past
+   the edge so they never cause scroll. */
+.layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Outer element — rises continuously from below viewport to above */
+.floaterRiser {
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+  user-select: none;
+  animation-name: efRise;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+/* Inner element — sways side to side independently of the rise */
+.floaterSwayer {
+  display: block;
+  line-height: 1;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  will-change: transform;
+  animation-name: efSway;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes efRise {
+  0% {
+    transform: translateY(105vh);
+    opacity: 0;
+  }
+  8%  { opacity: var(--ef-max-op); }
+  88% { opacity: var(--ef-max-op); }
+  100% {
+    transform: translateY(-18vh);
+    opacity: 0;
+  }
+}
+
+@keyframes efSway {
+  0%, 100% {
+    transform: translateX(0) rotate(-18deg) scale(1);
+  }
+  35% {
+    transform: translateX(var(--ef-sw-a)) rotate(14deg) scale(1.1);
+  }
+  70% {
+    transform: translateX(var(--ef-sw-b)) rotate(-12deg) scale(0.92);
+  }
+}

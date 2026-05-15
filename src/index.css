@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Label (text) ── */
+  --color-label-primary:      #000000;
+  --color-label-secondary:    rgba(60, 60, 67, 0.60);
+  --color-label-tertiary:     rgba(60, 60, 67, 0.30);
+  --color-label-quaternary:   rgba(60, 60, 67, 0.18);
+  --color-separator:          rgba(60, 60, 67, 0.36);
+
+  /* ── Fill (background surfaces) ── */
+  --color-fill-primary:       rgba(120, 120, 128, 0.20);
+  --color-fill-secondary:     rgba(120, 120, 128, 0.16);
+  --color-fill-tertiary:      rgba(120, 120, 128, 0.12);
+  --color-fill-quaternary:    rgba(120, 120, 128, 0.08);
+
+  /* ── Brand ── */
+  --color-link:               #0171ff;
+  --color-link-dim:           rgba(1, 113, 255, 0.45);
+  --color-system-red:         #ff382b;
+  --color-system-red-accent:  #fe4336;
+
+  /* ── Canvas & overlays ── */
+  --color-canvas:             #ffffff;
+  --color-overlay-sm:         rgba(0, 0, 0, 0.20);
+  --color-overlay-md:         rgba(0, 0, 0, 0.35);
+  --color-overlay-lg:         rgba(0, 0, 0, 0.82);
+  --color-overlay-xl:         rgba(0, 0, 0, 0.88);
+  --color-surface-sm:         rgba(255, 255, 255, 0.20);
+  --color-surface-md:         rgba(255, 255, 255, 0.38);
+
+  /* ── Gradient stops ── */
+  --color-host-from:          #31c859;
+  --color-host-to:            #00c8bf;
+  --color-invite-from:        #a72eb2;
+  --color-invite-to:          #6122b2;
+  --color-cta-from:           #0171ff;
+  --color-cta-to:             #0145ff;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  min-height: 100vh;
+}

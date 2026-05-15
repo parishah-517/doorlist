@@ -1,0 +1,357 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: var(--color-overlay-sm);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.panel {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: min(430px, 100vw);
+  height: 100dvh;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  background: rgba(220, 220, 225, 0.55);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-left: 0.5px solid rgba(255, 255, 255, 0.3);
+  box-shadow: -4px 0 32px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Nav bar ── */
+
+.navBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: max(32px, env(safe-area-inset-top)) 16px 16px;
+  flex-shrink: 0;
+}
+
+.navBack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 50x50 circle from Figma */
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  border: 1px solid var(--color-label-tertiary);
+  background: var(--color-fill-primary);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  color: var(--color-label-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.navBack:hover {
+  background: rgba(120, 120, 128, 0.28);
+}
+
+.navBack:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 2px;
+}
+
+.navTitle {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 22px;
+  color: var(--color-label-primary);
+}
+
+
+/* ── Search ── */
+
+.searchWrap {
+  padding: 0 16px 8px;
+  flex-shrink: 0;
+}
+
+.searchField {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* p-[12px] from Figma */
+  padding: 12px;
+  border-radius: 100px;
+  background: var(--color-fill-tertiary);
+}
+
+.searchIcon {
+  flex-shrink: 0;
+  color: rgba(60, 60, 67, 0.5);
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  font: inherit;
+  /* Figma: Body/Regular 17px, letter-spacing -0.4px */
+  font-size: 17px;
+  line-height: 22px;
+  letter-spacing: -0.4px;
+  color: var(--color-label-primary);
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: var(--color-label-secondary);
+}
+
+.searchInput::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.searchClear {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* ── Upload footer ── */
+
+.uploadFooter {
+  flex-shrink: 0;
+  padding: 12px 16px;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+  border-top: 0.5px solid var(--color-label-quaternary);
+}
+
+.uploadBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: none;
+  background: var(--color-fill-primary);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.3px;
+  color: var(--color-label-primary);
+  cursor: pointer;
+}
+
+.uploadBtn:hover {
+  background: rgba(120, 120, 128, 0.28);
+}
+
+/* ── Tab bar ── */
+
+.tabBar {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex-shrink: 0;
+}
+
+.tabBar::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* gap-[8px] for tabs with icon (active uses same gap, indicator grows) */
+  gap: 8px;
+  /* pt-[16px] from Figma */
+  padding: 16px 12px 0;
+  min-width: 60px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+/* Tabs without icons have slightly more gap to compensate */
+.tabNoIcon {
+  gap: 15px;
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: -2px;
+}
+
+.tabIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Fixed 16px height slot to align all icon rows uniformly */
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.tabIconWrap img {
+  display: block;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+
+.tabLabel {
+  /* Figma: Footnote/Semi Bold 13px, letter-spacing -0.4px, line-height 18px */
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  line-height: 18px;
+  color: var(--color-label-tertiary);
+  white-space: nowrap;
+}
+
+.tabLabelActive {
+  color: var(--color-label-primary);
+}
+
+.tabIndicator {
+  display: block;
+  width: 100%;
+  /* inactive: 1px separator, rgba(60,60,67,0.36) from Figma */
+  height: 1px;
+  background: var(--color-separator);
+  border-radius: 2px;
+}
+
+.tabIndicatorActive {
+  /* active: 2px black from Figma */
+  height: 2px;
+  background: var(--color-label-primary);
+}
+
+/* ── Photo grid ── */
+
+.scrollArea {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px 0;
+  scrollbar-width: thin;
+}
+
+.photoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding-bottom: 16px;
+}
+
+.photoCell {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  background: var(--color-fill-tertiary);
+  display: block;
+  transition: opacity 0.12s ease;
+}
+
+.photoCell:hover {
+  opacity: 0.82;
+}
+
+.photoCell:focus-visible {
+  outline: 3px solid #0171ff;
+  outline-offset: 2px;
+}
+
+.photoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Empty state ── */
+
+.emptyState {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Figma: gap-[17px] between illustration and text block, px-[32px] */
+  gap: 17px;
+  padding: 0 32px;
+}
+
+.emptyIllustration {
+  flex-shrink: 0;
+  /* Figma: 132×159px */
+  width: 132px;
+  height: 159px;
+  object-fit: contain;
+}
+
+.emptyText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.emptyTitle {
+  /* Figma: Bricolage Grotesque Bold 22px, leading 28px */
+  font-family: "Bricolage Grotesque", Inter, system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: -0.4px;
+  color: var(--color-label-primary);
+  text-align: center;
+  margin: 0;
+}
+
+.emptyBody {
+  /* Figma: Inter Regular 17px, leading 22px */
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.4px;
+  color: var(--color-label-secondary);
+  text-align: center;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 430px) {
+  .photoGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .navBack {
+    width: 40px;
+    height: 40px;
+  }
+
+  .scrollArea {
+    padding: 10px 12px 0;
+  }
+
+  .uploadFooter {
+    padding: 10px 12px;
+    padding-bottom: max(14px, env(safe-area-inset-bottom));
+  }
+}

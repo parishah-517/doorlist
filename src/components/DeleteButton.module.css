@@ -1,0 +1,39 @@
+.btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: opacity 0.12s ease;
+}
+
+.btn:hover {
+  opacity: 0.6;
+}
+
+.btn:active {
+  opacity: 0.4;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+.circle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+
+.minus {
+  position: absolute;
+  width: 8.75px;
+  height: 1.875px;
+}
