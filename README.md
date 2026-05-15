@@ -21,7 +21,7 @@ I noticed that in Luma and Partiful, the cover image helps set the visual tone o
 
 **Date & time picker**
 
-I used a custom calendar with react-day-picker, styled to match the rest of the form, and placed the time picker side-by-side on the right instead of stacking it below. This avoids forcing users through a long dropdown inside an overlay - they can pick the date on the left and the time on the right in one flow. I also noticed Partiful uses a similar side-by-side pattern. When users add an optional end time, I default it to 3 hours after the start time as a reasonable starting point, so they can adjust it if needed instead of setting everything from scratch.
+I used a custom calendar with react-day-picker, styled to match the rest of the form, and placed the time picker side-by-side on the right instead of stacking it below. This avoids forcing users through a long dropdown inside an overlay - they can pick the date on the left and the time on the right in one flow. I also noticed Partiful uses a similar side-by-side pattern. When users add an optional end time, I default it to 3 hours after the start time as a reasonable starting point, so they can adjust it if needed instead of setting everything from scratch. I also added frontend validation that blocks submission if the end time is set but isn't after the start time.
 
 **Emoji effects**
 
@@ -65,7 +65,7 @@ Clicking the invite button copies the event link to the clipboard and shows a to
 
 **React + TypeScript + Vite** — fast iteration, good tooling, what I'm most comfortable with.
 
-**CSS Modules + Tailwind** — CSS Modules for component-scoped styles (no accidental overrides), Tailwind for consistent color tokens across the app. The two work well together.
+**CSS Modules** — component-scoped styles with no accidental overrides. Color tokens are defined as plain CSS custom properties in a global `:root` block and referenced throughout — no utility framework needed.
 
 **Supabase** — I've used it on personal projects before so I could move quickly. It handles both the Postgres database and image storage for custom cover uploads.
 

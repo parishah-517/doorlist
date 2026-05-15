@@ -178,6 +178,10 @@ export function CreateEventScreen() {
 
   const handleCreate = async () => {
     if (!canSubmit || creating) return;
+    if (endAt && new Date(endAt) <= new Date(startAt)) {
+      showToast("End time must be after start time.");
+      return;
+    }
     setCreating(true);
 
     const payload: CreateEventPayload = {
