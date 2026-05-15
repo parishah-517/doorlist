@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { Calendar, MapPin } from "lucide-react";
 import { EmojiFloat } from "../components/EmojiFloat";
-import { Modal } from "../components/Modal";
 import { DetailRow } from "../components/DetailRow";
 import { assets } from "../figmaAssets";
 import { getEvent, type EventRow } from "../lib/supabase";
@@ -91,10 +90,12 @@ function useMapCoords(location: string | undefined) {
 export function EventScreen() {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
-  const transitionCover = (location.state as { coverSrc?: string } | null)?.coverSrc;
+  const transitionState = location.state as { coverSrc?: string; location?: string } | null;
+  const transitionCover = transitionState?.coverSrc;
+  const transitionLocation = transitionState?.location;
   const [event, setEvent] = useState<EventRow | null>(null);
   const [loading, setLoading] = useState(true);
-  const [descOpen, setDescOpen] = useState(false);
+  const [descExpanded, setDescExpanded] = useState(false);
   const [isClamped, setIsClamped] = useState(false);
   const descRef = useRef<HTMLParagraphElement>(null);
   const [rsvpStatus, setRsvpStatus] = useState<RsvpStatus | null>(null);
@@ -109,7 +110,7 @@ export function EventScreen() {
     });
   }, [id]);
 
-  const mapCoords = useMapCoords(event?.location);
+  const mapCoords = useMapCoords(transitionLocation ?? event?.location);
 
   useEffect(() => {
     const el = descRef.current;
@@ -213,12 +214,12 @@ export function EventScreen() {
             {event.description && (
               <div className={styles.about}>
                 <div className={styles.aboutLabel}>About</div>
-                <p ref={descRef} className={styles.aboutText}>
+                <p ref={descRef} className={`${styles.aboutText} ${descExpanded ? styles.aboutExpanded : ""}`}>
                   {event.description}
                 </p>
-                {isClamped && (
-                  <button type="button" className={styles.seeMore} onClick={() => setDescOpen(true)}>
-                    See More
+                {(isClamped || descExpanded) && (
+                  <button type="button" className={styles.seeMore} onClick={() => setDescExpanded((v) => !v)}>
+                    {descExpanded ? "See Less" : "See More"}
                   </button>
                 )}
               </div>
@@ -289,11 +290,6 @@ export function EventScreen() {
 
       {toast && <div className={styles.toast} role="status">{toast}</div>}
 
-      {descOpen && (
-        <Modal title="About" onClose={() => setDescOpen(false)}>
-          <p className={styles.modalBody}>{event.description}</p>
-        </Modal>
-      )}
     </div>
   );
 }

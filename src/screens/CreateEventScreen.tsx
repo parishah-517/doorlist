@@ -223,7 +223,7 @@ export function CreateEventScreen() {
       showToast(`Error: ${error.message}`);
       setCreating(false);
     } else {
-      navigate(`/events/${row.id}`, { state: { coverSrc: heroSrc } });
+      navigate(`/events/${row.id}`, { state: { coverSrc: heroSrc, location: location.trim() } });
     }
   };
 
